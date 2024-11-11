@@ -252,13 +252,11 @@ def compileASM(filepath):
     file = open(filepath, "r")
     lineNumber = 1  #file line number for specifying errors
     for line in file:
-        #print(line)
         line = line.upper()
         line = line.split(";")  #getting rid of comments
         line[0] = line[0].replace("\n", "") #removing return line
         line[0] = line[0].replace("\r", "")
         line[0] = line[0].strip()
-        #print(line)
         if (len(line[0]) > 0):
             parseLine(line[0], lineNumber)
         lineNumber = lineNumber + 1
@@ -288,7 +286,6 @@ def parseLine(line, lineNumber):
             labelError(lineNumber)
         line = labelLine[1].strip()
     line = line.split(" ")
-    #print(str(lineNumber) + "\t" + str(label) + "\t" + str(line))
     operations = encode(line, lineNumber)
     if (not(operations == None)):
         program.append(createLine(label, operations))
@@ -319,7 +316,6 @@ def compileResults():
         print(RED + "\tProgram could not be compiled" + ENDCOLOR)
     else:
         print("\tProgram compiled Successfully")
-        #print(output)
     print("\tProgram length in words: " + str(getCurrentAddress()))
     print("\tWriting to spreadsheet ROM...")
     sendToSpreadsheet()
